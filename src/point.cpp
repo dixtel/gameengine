@@ -2,10 +2,10 @@
 
 Point::Point() {
 
-	x = y = x = 0;
+	x = y = z = 0;
 }
 
-Point::Point(float x, float y, float x) {
+Point::Point(float x, float y, float z) {
 
 	this->x = x;
 	this->y = y;
@@ -25,4 +25,11 @@ Point Point::operator - (Vector v) {
 Vector Point::operator - (Point p) {
 
 	return Vector(x - p.x, y - p.y, z - p.z);
+}
+
+void Point::operator = (Point p) {
+
+	x = p.x;
+	y = p.y;
+	z = p.z;
 }

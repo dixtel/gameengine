@@ -3,10 +3,12 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
+LIBS += -lSDL2
+
 SOURCES += main.cpp \
-    test/main.cpp \
     src/point.cpp \
-    src/vector.cpp
+    src/vector.cpp \
+    test/test.cpp
 
 SUBDIRS += \
     gameengine.pro
