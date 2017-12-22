@@ -8,7 +8,9 @@ LIBS += -lSDL2
 SOURCES += main.cpp \
     src/point.cpp \
     src/vector.cpp \
-    test/test.cpp
+    test/test.cpp \
+    src/camera.cpp \
+    src/renderer.cpp
 
 SUBDIRS += \
     gameengine.pro
@@ -18,4 +20,6 @@ DISTFILES += \
 
 HEADERS += \
     include/point.h \
-    include/vector.h
+    include/vector.h \
+    include/camera.h \
+    include/renderer.h

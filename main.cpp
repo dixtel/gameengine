@@ -1,104 +1,112 @@
 
 #include "include/point.h"
 #include "include/vector.h"
+#include "include/camera.h"
 
-#include <SDL2/SDL.h>
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <time.h>
 
 int main() {
 
-	SDL_Init(SDL_INIT_EVERYTHING);
+	const unsigned WINDOW_WIDTH = 800;
+	const unsigned WINDOW_HEIGHT = 400;
+	const int OBJECTS_MAX = 100;
 
-	SDL_Window *window = SDL_CreateWindow("game engine", 100, 100, 800, 400, SDL_WINDOW_SHOWN);
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	Camera camera;
 
-	if (!window || !renderer) {
+	if (!camera.render.Init(WINDOW_WIDTH, WINDOW_HEIGHT, "gameengine")) {
 
-		SDL_Quit();
 		return 0;
 	}
 
+	camera.minX = 0;
+	camera.maxX = WINDOW_WIDTH;
+	camera.minY = 0;
+	camera.maxY = WINDOW_HEIGHT;
+	camera.minZ = 0;
+	camera.maxZ = 100;
 
-	std::vector <Point> points(100);
+	camera.CreateObjects(OBJECTS_MAX);
 
-	for(int i = 0; i < 100; ++i) {
+	srand(time(NULL));
+	for(int i = 0; i < OBJECTS_MAX; ++i) {
 
-		points[i] = Point(rand() % 800, rand() % 400, 0);
+		camera.SetObject(i, Point(rand() % 800, rand() % 400, rand() % 200));
 	}
 
+
 	bool running = true;
-
 	SDL_Event event;
-
 	while (running) {
 
 		while(SDL_PollEvent(&event)) {
 
 			if (event.type == SDL_QUIT)
 				running = false;
-			else if (event.key.keysym.sym == SDLK_a) {
+			else if (event.key.keysym.sym == SDLK_c) {
 
-				std::cout << "tets" << std::endl;
-
-				Point origin(0, 0, 0);
-
-				for(int i = 0; i < 100; ++i) {
-
-					Vector vec = points[i] - origin;
-
-					vec = vec.Scale(Vector(0.5, 0.5, 0.5));
-
-					points[i] = Point(0, 0, 0);
-
-					points[i] = points[i] + vec;
-				}
+				camera.DrawScene();
 			}
-			else if (event.key.keysym.sym == SDLK_r) {
+//			else if (event.key.keysym.sym == SDLK_a) {
 
-				Point origin(0, 0, 0);
+//				Point origin(0, 0, 0);
 
-				for(int i = 0; i < 100; ++i) {
+//				for(int i = 0; i < OBJECTS_MAX; ++i) {
 
-					Vector vec = points[i] - origin;
+//					Vector vec = points[i] - origin;
 
-					vec = vec.RotateXY(15);
+//					vec = vec.Scale(Vector(0.5, 0.5, 0.5));
 
-					points[i] = Point(0, 0, 0);
+//					points[i] = Point(0, 0, 0);
 
-					points[i] = points[i] + vec;
-				}
-			}
-			else if (event.key.keysym.sym == SDLK_s) {
+//					points[i] = points[i] + vec;
+//				}
+//			}
+//			else if (event.key.keysym.sym == SDLK_r) {
 
-				Point origin(0, 0, 0);
+//				Point origin(0, 0, 0);
 
-				for(int i = 0; i < 100; ++i) {
+//				for(int i = 0; i < OBJECTS_MAX; ++i) {
 
-					Vector vec = points[i] - origin;
+//					Vector vec = points[i] - origin;
 
-					vec = vec.Scale(Vector(2,2, 2));
+//					vec = vec.RotateXY(15);
 
-					points[i] = Point(0, 0, 0);
+//					points[i] = Point(0, 0, 0);
 
-					points[i] = points[i] + vec;
-				}
+//					points[i] = points[i] + vec;
+//				}
+//			}
+//			else if (event.key.keysym.sym == SDLK_s) {
+
+//				Point origin(0, 0, 0);
+
+//				for(int i = 0; i < OBJECTS_MAX; ++i) {
+
+//					Vector vec = points[i] - origin;
+
+//					vec = vec.Scale(Vector(2,2, 2));
+
+//					points[i] = Point(0, 0, 0);
+
+//					points[i] = points[i] + vec;
+//				}
+//			}
+			else if (event.key.keysym.sym == SDLK_d) {
+
+				camera.render.SetDrawColor(SDL_Color{0, 0, 0, 255});
+				camera.render.Clear();
+
+				camera.render.SetDrawColor(SDL_Color{255, 0, 0, 255});
+				for(int i = 0; i < OBJECTS_MAX; ++i)
+					camera.render.SetPoint(camera.GetObject(i)->x, camera.GetObject(i)->y);
+
+				camera.render.Draw();
 			}
 		}
-
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderClear(renderer);
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-
-		for(int i = 0; i < 100; ++i)
-			SDL_RenderDrawPoint(renderer, points[i].x, points[i].y);
-
-		SDL_RenderPresent(renderer);
 	}
-
-
-	SDL_Quit();
 
 	return 0;
 }
