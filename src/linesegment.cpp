@@ -18,13 +18,11 @@ void LineSegment::Draw(Renderer *renderer) {
 
 std::vector <Point> LineSegment::GetLineSegmentPoints() {
 
+	std::vector <Point> points;
 	Point p1 = start;
 	Point p2 = end;
 
-
 	if (p1.x == p2.x) {
-
-		std::vector <Point> points;
 
 		int y;
 		int max;
@@ -49,8 +47,6 @@ std::vector <Point> LineSegment::GetLineSegmentPoints() {
 	}
 
 	if (p1.y == p2.y) {
-
-		std::vector <Point> points;
 
 		int x;
 		int max;
@@ -77,7 +73,6 @@ std::vector <Point> LineSegment::GetLineSegmentPoints() {
 	if (p1.y < p2.y)
 		std::swap(p1, p2);
 
-	std::vector <Point> points;
 	Point direction(p2.x - p1.x, p2.y - p1.y, 0);
 	float slope = abs(direction.y / direction.x);
 	
