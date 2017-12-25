@@ -2,13 +2,16 @@
 #define POINT_H
 
 #include "include/vector.h"
+#include "include/drawobject.h"
 
 #include <iostream>
 
-class Point {
+class Point : public DrawObject {
 public:
 	Point();
 	Point(float x, float y, float z);
+
+	void Draw(Renderer *renderer);
 
 	Point operator + (Vector v);
 	Point operator - (Vector v);

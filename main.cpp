@@ -2,6 +2,7 @@
 #include "include/point.h"
 #include "include/vector.h"
 #include "include/camera.h"
+#include "include/linesegment.h"
 
 #include <iostream>
 #include <vector>
@@ -9,6 +10,11 @@
 #include <time.h>
 
 int main() {
+
+	//LineSegment line(Point(0, 0, 0), Point(200, 250, 0));
+	LineSegment line(Point(250, 250, 0), Point(500, 250, 0));
+
+	std::cout << line.start << " " << line.end << std::endl;
 
 	const unsigned WINDOW_WIDTH = 800;
 	const unsigned WINDOW_HEIGHT = 400;
@@ -20,6 +26,23 @@ int main() {
 
 		return 0;
 	}
+
+
+	for (int i = 0; i < 50; ++i) {
+
+		camera.render.SetDrawColor(SDL_Color {0, 0, 0, 255});
+		camera.render.Clear();
+		camera.render.SetDrawColor(SDL_Color {255, 0, 0, 255});
+		line.Draw(&camera.render);
+		camera.render.Draw();
+
+		line.end.x += 10;
+
+		char x;
+		std::cin >> x;
+	}
+
+	return 0;
 
 	camera.minX = 0;
 	camera.maxX = WINDOW_WIDTH;

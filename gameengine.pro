@@ -10,7 +10,9 @@ SOURCES += main.cpp \
     src/vector.cpp \
     test/test.cpp \
     src/camera.cpp \
-    src/renderer.cpp
+    src/renderer.cpp \
+    src/linesegment.cpp \
+    src/drawobject.cpp
 
 SUBDIRS += \
     gameengine.pro
@@ -22,4 +24,6 @@ HEADERS += \
     include/point.h \
     include/vector.h \
     include/camera.h \
-    include/renderer.h
+    include/renderer.h \
+    include/linesegment.h \
+    include/drawobject.h
