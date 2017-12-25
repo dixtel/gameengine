@@ -11,12 +11,13 @@ class LineSegment : public DrawObject {
 public:
 	LineSegment(Point start, Point end);
 
-	void Draw(Renderer *renderer);
-
-	std::vector <Point> GetLineSegmentPoints();
+	void Draw(Renderer *render);
 
 	Point start;
 	Point end;
+
+private:
+	std::vector <Point> GetLineSegmentPoints();
 };
 
 #endif // LINESEGMENT_H

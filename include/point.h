@@ -5,13 +5,14 @@
 #include "include/drawobject.h"
 
 #include <iostream>
+#include <vector>
 
 class Point : public DrawObject {
 public:
 	Point();
 	Point(float x, float y, float z);
 
-	void Draw(Renderer *renderer);
+	void Draw(Renderer *render);
 
 	Point operator + (Vector v);
 	Point operator - (Vector v);

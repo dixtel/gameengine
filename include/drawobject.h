@@ -3,10 +3,12 @@
 
 #include "include/renderer.h"
 
+#include <vector>
+
 class DrawObject {
 public:	
 
-	virtual void Draw(Renderer *renderer) = 0;
+	virtual void Draw(Renderer *render) = 0;
 };
 
 #endif // DRAWOBJECT_H

@@ -12,9 +12,9 @@ Point::Point(float x, float y, float z) {
 	this->z = z;
 }
 
-void Point::Draw(Renderer *renderer) {
+void Point::Draw(Renderer *render) {
 
-	renderer->SetPoint(x, y);
+	render->SetPoint(x, y);
 }
 
 Point Point::operator + (Vector v) {
