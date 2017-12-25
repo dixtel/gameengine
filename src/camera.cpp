@@ -4,43 +4,69 @@ Camera::Camera() {
 
 }
 
+bool Camera::InitRender(const unsigned window_width, const unsigned window_height, const std::string window_title) {
+
+	return render.Init(window_width, window_height, window_title);
+}
+
 void Camera::DrawScene() {
 
 	render.SetDrawColor(SDL_Color{0, 0, 0, 255});
 	render.Clear();
 	render.SetDrawColor(SDL_Color{255, 0, 0, 255});
 
-	for(int i = 0; i < world_objects.size(); i++) {
+	for(int i = 0; i < points_objects.size(); i++) {
 
-		Point *curr_p = GetObject(i);
+		Point point = points_objects[i];
 
-		if ((curr_p->x >= minX) && (curr_p->x <= maxX) &&
-			(curr_p->y >= minY) && (curr_p->y <= maxY) &&
-			(curr_p->z >= minZ) && (curr_p->z <= maxZ)) {
+		if ((point.x >= minX) && (point.x <= maxX) &&
+			(point.y >= minY) && (point.y <= maxY) &&
+			(point.z >= minZ) && (point.z <= maxZ)) {
 
-			render.SetPoint(curr_p->x, curr_p->y);
-			std::cout << "test\n";
+			DrawObject *drawobject = &point;
+			drawobject->Draw(&render);
+		}
+	}
+
+	for(int i = 0; i < linesegments_objects.size(); i++) {
+
+		LineSegment linesegment = linesegments_objects[i];
+
+		if ((linesegment.start.x >= minX) && (linesegment.start.x <= maxX) &&
+			(linesegment.start.y >= minY) && (linesegment.start.y <= maxY) &&
+			(linesegment.start.z >= minZ) && (linesegment.start.z <= maxZ) ) {
+
+			DrawObject *drawobject = &linesegment;
+			drawobject->Draw(&render);
+		}
+		else if ((linesegment.end.x >= minX) && (linesegment.end.x <= maxX) &&
+				(linesegment.end.y >= minY) && (linesegment.end.y <= maxY) &&
+				(linesegment.end.z >= minZ) && (linesegment.end.z <= maxZ) ) {
+
+			DrawObject *drawobject = &linesegment;
+			drawobject->Draw(&render);
 		}
 	}
 
 	render.Draw();
 }
 
-void Camera::CreateObjects(unsigned size) {
+void Camera::AddDrawObject(Point object) {
 
-	world_objects.resize(size);
+	points_objects.push_back(object);
 }
 
-void Camera::SetObject(unsigned id, Point object) {
+void Camera::AddDrawObject(LineSegment object) {
 
-	if (id < world_objects.size())
-		world_objects[id] = object;
+	linesegments_objects.push_back(object);
 }
 
-Point *Camera::GetObject(unsigned id) {
+void Camera::SetBorder(int minX, int maxX, int minY, int maxY, int minZ, int maxZ) {
 
-	if (id < world_objects.size())
-		return &world_objects[id];
-
-	return NULL;
+	this->minX = minX;
+	this->maxX = maxX;
+	this->minY = minY;
+	this->maxY = maxY;
+	this->minZ = minZ;
+	this->maxZ = maxZ;
 }
