@@ -28,21 +28,9 @@ int main() {
 
 	camera.SetBorder(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 100);
 
-	std::vector <Point> points_objects;
-	std::vector <LineSegment> linesegmets_objects;
+	std::vector <Circle> circle_objects;
 
 	srand(time(NULL));
-	for(int i = 0; i < 20; ++i) {
-
-		points_objects.push_back(Point(rand() % 800, rand() % 400, rand() % 200));
-		linesegmets_objects.push_back(LineSegment(Point(rand() % 800, rand() % 400, rand() % 200), Point(rand() % 800, rand() % 400, rand() % 200)));
-	}
-
-	for(int i = 0; i < 20; ++i) {
-
-		camera.AddDrawObject(points_objects[i]);
-		camera.AddDrawObject(linesegmets_objects[i]);
-	}
 
 
 	bool running = true;
@@ -53,6 +41,12 @@ int main() {
 
 			if (event.type == SDL_QUIT)
 				running = false;
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+
+				int x, y;
+				SDL_GetMouseState(&x, &y);
+				camera.AddDrawObject(Circle(Point(x, y, 0), rand() % 100));
+			}
 		}
 
 		camera.DrawScene();
