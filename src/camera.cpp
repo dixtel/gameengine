@@ -15,9 +15,9 @@ void Camera::DrawScene() {
 	render.Clear();
 	render.SetDrawColor(SDL_Color{255, 0, 0, 255});
 
-	for(int i = 0; i < points_objects.size(); i++) {
+	for(int i = 0; i < point_objects.size(); i++) {
 
-		Point point = points_objects[i];
+		Point point = point_objects[i];
 
 		if ((point.x >= minX) && (point.x <= maxX) &&
 			(point.y >= minY) && (point.y <= maxY) &&
@@ -28,9 +28,9 @@ void Camera::DrawScene() {
 		}
 	}
 
-	for(int i = 0; i < linesegments_objects.size(); i++) {
+	for(int i = 0; i < linesegment_objects.size(); i++) {
 
-		LineSegment linesegment = linesegments_objects[i];
+		LineSegment linesegment = linesegment_objects[i];
 
 		if ((linesegment.start.x >= minX) && (linesegment.start.x <= maxX) &&
 			(linesegment.start.y >= minY) && (linesegment.start.y <= maxY) &&
@@ -48,17 +48,35 @@ void Camera::DrawScene() {
 		}
 	}
 
+	for(int i = 0; i < circle_objects.size(); i++) {
+
+		Circle circle = circle_objects[i];
+
+		if ((circle.position.x >= minX) && (circle.position.x <= maxX) &&
+			(circle.position.y >= minY) && (circle.position.y <= maxY) &&
+			(circle.position.z >= minZ) && (circle.position.z <= maxZ)) {
+
+			DrawObject *drawobject = &circle;
+			drawobject->Draw(&render);
+		}
+	}
+
 	render.Draw();
 }
 
 void Camera::AddDrawObject(Point object) {
 
-	points_objects.push_back(object);
+	point_objects.push_back(object);
 }
 
 void Camera::AddDrawObject(LineSegment object) {
 
-	linesegments_objects.push_back(object);
+	linesegment_objects.push_back(object);
+}
+
+void Camera::AddDrawObject(Circle object) {
+
+	circle_objects.push_back(object);
 }
 
 void Camera::SetBorder(int minX, int maxX, int minY, int maxY, int minZ, int maxZ) {
