@@ -61,6 +61,33 @@ void Camera::DrawScene() {
 		}
 	}
 
+	for(int i = 0; i < triangle_objects.size(); i++) {
+
+		Triangle triangle = triangle_objects[i];
+
+		if ((triangle.p1.x >= minX) && (triangle.p1.x <= maxX) &&
+			(triangle.p1.y >= minY) && (triangle.p1.y <= maxY) &&
+			(triangle.p1.z >= minZ) && (triangle.p1.z <= maxZ)) {
+
+			DrawObject *drawobject = &triangle;
+			drawobject->Draw(&render);
+		}
+		else if ((triangle.p2.x >= minX) && (triangle.p2.x <= maxX) &&
+				 (triangle.p2.y >= minY) && (triangle.p2.y <= maxY) &&
+				 (triangle.p2.z >= minZ) && (triangle.p2.z <= maxZ)) {
+
+			DrawObject *drawobject = &triangle;
+			drawobject->Draw(&render);
+		}
+		else if ((triangle.p3.x >= minX) && (triangle.p3.x <= maxX) &&
+				 (triangle.p3.y >= minY) && (triangle.p3.y <= maxY) &&
+				 (triangle.p3.z >= minZ) && (triangle.p3.z <= maxZ)) {
+
+			DrawObject *drawobject = &triangle;
+			drawobject->Draw(&render);
+		}
+	}
+
 	render.Draw();
 }
 
@@ -77,6 +104,11 @@ void Camera::AddDrawObject(LineSegment object) {
 void Camera::AddDrawObject(Circle object) {
 
 	circle_objects.push_back(object);
+}
+
+void Camera::AddDrawObject(Triangle object) {
+
+	triangle_objects.push_back(object);
 }
 
 void Camera::SetBorder(int minX, int maxX, int minY, int maxY, int minZ, int maxZ) {

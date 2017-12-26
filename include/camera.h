@@ -6,6 +6,8 @@
 #include "include/point.h"
 #include "include/linesegment.h"
 #include "include/circle.h"
+#include "include/triangle.h"
+
 
 #include <vector>
 #include <iostream>
@@ -19,6 +21,7 @@ public:
 	void AddDrawObject(Point object);
 	void AddDrawObject(LineSegment object);
 	void AddDrawObject(Circle object);
+	void AddDrawObject(Triangle object);
 
 	void SetBorder(int minX, int maxX, int minY, int maxY, int minZ, int maxZ);
 
@@ -26,6 +29,7 @@ private:
 	std::vector <Point> point_objects;
 	std::vector <LineSegment> linesegment_objects;
 	std::vector <Circle> circle_objects;
+	std::vector <Triangle> triangle_objects;
 
 	Renderer render;
 	int minX, maxX;
