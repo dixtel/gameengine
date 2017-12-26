@@ -75,27 +75,52 @@ std::vector <Point> LineSegment::GetLineSegmentPoints() {
 
 	Point direction(p2.x - p1.x, p2.y - p1.y, 0);
 	float slope = abs(direction.y / direction.x);
-	
-	int step = (p1.x < p2.x) ? 1 : -1;
-	float curr_error = 0;
 
-	int x = p1.x;
-	int y = p1.y;
+	// for increments x by step
+	if (slope <= 1) {
 
-	do {
+		int step = (p1.x < p2.x) ? 1 : -1;
+		float curr_error = 0;
 
-		points.push_back(Point(x, y, 0));
-		curr_error += slope;
+		int x = p1.x;
+		int y = p1.y;
 
-		while (curr_error >= 0.5) {
+		do {
 
-			y += (direction.y > 0) - (direction.y < 0); // add direction.y sign number
 			points.push_back(Point(x, y, 0));
-			curr_error -= 1;
-		}
+			curr_error += slope;
 
-		x += step;
-	} while (x != p2.x);
+			while (curr_error >= 0.5) {
 
+				y += (direction.y > 0) - (direction.y < 0);
+				curr_error -= 1;
+			}
+
+			x += step;
+		} while (x != p2.x);
+	}
+	else { 	// for increments y by step
+
+		slope = abs(direction.x / direction.y);
+		int step = 1;
+		float curr_error = 0;
+
+		int x = p1.x;
+		int y = p1.y;
+
+		do {
+
+			points.push_back(Point(x, y, 0));
+			curr_error += slope;
+
+			while (curr_error >= 0.5) {
+
+				x += (direction.x > 0) - (direction.x < 0);
+				curr_error -= 1;
+			}
+
+			y -= step;
+		} while (y != p2.y);
+	}
 	return points;
 }
