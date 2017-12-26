@@ -13,7 +13,7 @@ void Triangle::Draw(Renderer *render) {
 
 	for (int i = 0; i < points.size(); ++i) {
 
-		render->SetPoint(points[i].x, points[i].x);
+		render->SetPoint(points[i].x, points[i].y);
 	}
 }
 
