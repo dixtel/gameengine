@@ -13,11 +13,10 @@ public:
 
 	void Draw(Renderer *render);
 
+	std::vector <Point> GetLineSegmentPoints();
+
 	Point start;
 	Point end;
-
-private:
-	std::vector <Point> GetLineSegmentPoints();
 };
 
 #endif // LINESEGMENT_H
