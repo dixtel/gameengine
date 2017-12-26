@@ -88,6 +88,40 @@ void Camera::DrawScene() {
 		}
 	}
 
+	for(int i = 0; i < quad_objects.size(); i++) {
+
+		Quad quad = quad_objects[i];
+
+		if ((quad.p1.x >= minX) && (quad.p1.x <= maxX) &&
+			(quad.p1.y >= minY) && (quad.p1.y <= maxY) &&
+			(quad.p1.z >= minZ) && (quad.p1.z <= maxZ)) {
+
+			DrawObject *drawobject = &quad;
+			drawobject->Draw(&render);
+		}
+		else if ((quad.p2.x >= minX) && (quad.p2.x <= maxX) &&
+				 (quad.p2.y >= minY) && (quad.p2.y <= maxY) &&
+				 (quad.p2.z >= minZ) && (quad.p2.z <= maxZ)) {
+
+			DrawObject *drawobject = &quad;
+			drawobject->Draw(&render);
+		}
+		else if ((quad.p3.x >= minX) && (quad.p3.x <= maxX) &&
+				 (quad.p3.y >= minY) && (quad.p3.y <= maxY) &&
+				 (quad.p3.z >= minZ) && (quad.p3.z <= maxZ)) {
+
+			DrawObject *drawobject = &quad;
+			drawobject->Draw(&render);
+		}
+		else if ((quad.p4.x >= minX) && (quad.p4.x <= maxX) &&
+				 (quad.p4.y >= minY) && (quad.p4.y <= maxY) &&
+				 (quad.p4.z >= minZ) && (quad.p4.z <= maxZ)) {
+
+			DrawObject *drawobject = &quad;
+			drawobject->Draw(&render);
+		}
+	}
+
 	render.Draw();
 }
 
@@ -109,6 +143,11 @@ void Camera::AddDrawObject(Circle object) {
 void Camera::AddDrawObject(Triangle object) {
 
 	triangle_objects.push_back(object);
+}
+
+void Camera::AddDrawObject(Quad object) {
+
+	quad_objects.push_back(object);
 }
 
 void Camera::SetBorder(int minX, int maxX, int minY, int maxY, int minZ, int maxZ) {

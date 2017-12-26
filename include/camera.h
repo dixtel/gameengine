@@ -7,7 +7,7 @@
 #include "include/linesegment.h"
 #include "include/circle.h"
 #include "include/triangle.h"
-
+#include "include/quad.h"
 
 #include <vector>
 #include <iostream>
@@ -22,6 +22,7 @@ public:
 	void AddDrawObject(LineSegment object);
 	void AddDrawObject(Circle object);
 	void AddDrawObject(Triangle object);
+	void AddDrawObject(Quad object);
 
 	void SetBorder(int minX, int maxX, int minY, int maxY, int minZ, int maxZ);
 
@@ -30,6 +31,7 @@ private:
 	std::vector <LineSegment> linesegment_objects;
 	std::vector <Circle> circle_objects;
 	std::vector <Triangle> triangle_objects;
+	std::vector <Quad> quad_objects;
 
 	Renderer render;
 	int minX, maxX;
