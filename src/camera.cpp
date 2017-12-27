@@ -143,6 +143,16 @@ void Camera::DrawScene() {
 	render.Draw();
 }
 
+void Camera::ClearScene() {
+
+	point_objects.clear();
+	linesegment_objects.clear();
+	circle_objects.clear();
+	triangle_objects.clear();
+	quad_objects.clear();
+	polygon_objects.clear();
+}
+
 void Camera::AddDrawObject(Point object) {
 
 	point_objects.push_back(object);

@@ -19,6 +19,7 @@ public:
 
 	bool InitRender(const unsigned window_width, const unsigned window_height, const std::string window_title);
 	void DrawScene();
+	void ClearScene();
 	void AddDrawObject(Point object);
 	void AddDrawObject(LineSegment object);
 	void AddDrawObject(Circle object);
