@@ -10,10 +10,24 @@ Point::Point(float x, float y, float z) {
 	this->x = x;
 	this->y = y;
 	this->z = z;
+	this->x = x;
+	this->y = y;
+	this->z = z;
+}
+
+Point::Point(float x, float y, float z, unsigned char r, unsigned char g, unsigned char b) {
+
+	this->x = x;
+	this->y = y;
+	this->z = z;
+	this->r = r;
+	this->g = g;
+	this->b = b;
 }
 
 void Point::Draw(Renderer *render) {
 
+	render->SetDrawColor(SDL_Color{r, g, b, 255});
 	render->SetPoint(x, y);
 }
 

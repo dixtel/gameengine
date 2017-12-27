@@ -1,9 +1,12 @@
 #include "include/linesegment.h"
 
-LineSegment::LineSegment(Point start, Point end) {
+LineSegment::LineSegment(Point start, Point end, unsigned char r, unsigned char g, unsigned char b) {
 
 	this->start = start;
 	this->end = end;
+	this->r = r;
+	this->g = g;
+	this->b = b;
 }
 
 void LineSegment::Draw(Renderer *render) {
@@ -12,6 +15,7 @@ void LineSegment::Draw(Renderer *render) {
 
 	for (int i = 0; i < points.size(); ++i) {
 
+		render->SetDrawColor(SDL_Color{r, g, b, 255});
 		render->SetPoint(points[i].x, points[i].y);
 	}
 }
@@ -40,7 +44,7 @@ std::vector <Point> LineSegment::GetLineSegmentPoints() {
 
 		for (int i = y; i < max; ++i) {
 
-			points.push_back(Point(p1.x, i, 0));
+			points.push_back(Point(p1.x, i, 0, r, g, b));
 		}
 
 		return points;
@@ -64,7 +68,7 @@ std::vector <Point> LineSegment::GetLineSegmentPoints() {
 
 		for (int i = x; i < max; ++i) {
 
-			points.push_back(Point(i, p1.y, 0));
+			points.push_back(Point(i, p1.y, 0, r, g, b));
 		}
 
 		return points;
@@ -87,7 +91,7 @@ std::vector <Point> LineSegment::GetLineSegmentPoints() {
 
 		do {
 
-			points.push_back(Point(x, y, 0));
+			points.push_back(Point(x, y, 0, r, g, b));
 			curr_error += slope;
 
 			while (curr_error >= 0.5) {
@@ -110,7 +114,7 @@ std::vector <Point> LineSegment::GetLineSegmentPoints() {
 
 		do {
 
-			points.push_back(Point(x, y, 0));
+			points.push_back(Point(x, y, 0, r, g, b));
 			curr_error += slope;
 
 			while (curr_error >= 0.5) {

@@ -9,7 +9,7 @@
 
 class Triangle : public DrawObject {
 public:
-	Triangle(Point p1, Point p2, Point p3);
+	Triangle(Point p1, Point p2, Point p3, unsigned char r, unsigned char g, unsigned char b);
 
 	void Draw(Renderer *render);
 
@@ -18,6 +18,10 @@ public:
 	Point p1;
 	Point p2;
 	Point p3;
+
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
 };
 
 #endif // TRIANGLE_H

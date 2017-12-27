@@ -9,7 +9,7 @@
 
 class LineSegment : public DrawObject {
 public:
-	LineSegment(Point start, Point end);
+	LineSegment(Point start, Point end, unsigned char r, unsigned char g, unsigned char b);
 
 	void Draw(Renderer *render);
 
@@ -17,6 +17,10 @@ public:
 
 	Point start;
 	Point end;
+
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
 };
 
 #endif // LINESEGMENT_H

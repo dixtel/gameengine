@@ -8,7 +8,7 @@
 
 class Circle : public DrawObject {
 public:
-	Circle(Point position, float radius);
+	Circle(Point position, float radius, unsigned char r, unsigned char g, unsigned char b);
 
 	void Draw(Renderer *render);
 
@@ -16,6 +16,10 @@ public:
 
 	Point position;
 	float radius;
+
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
 };
 
 #endif // CIRCLE_H

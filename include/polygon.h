@@ -9,7 +9,7 @@
 
 class Polygon : public DrawObject {
 public:
-	Polygon(std::vector <Point> points);
+	Polygon(std::vector <Point> points, unsigned char r, unsigned char g, unsigned char b);
 
 	void Draw(Renderer *render);
 
@@ -19,6 +19,10 @@ public:
 	std::vector <Point> GetPolygonPoints();
 
 	std::vector <Point> points;
+
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
 };
 
 #endif // POLYGON_H

@@ -1,8 +1,11 @@
 #include "include/polygon.h"
 
-Polygon::Polygon(std::vector <Point> points) {
+Polygon::Polygon(std::vector <Point> points, unsigned char r, unsigned char g, unsigned char b) {
 
 	this->points = points;
+	this->r = r;
+	this->g = g;
+	this->b = b;
 }
 
 void Polygon::Draw(Renderer *render) {
@@ -11,6 +14,7 @@ void Polygon::Draw(Renderer *render) {
 
 	for (int i = 0; i < points.size(); ++i) {
 
+		render->SetDrawColor(SDL_Color{r, g, b, 255});
 		render->SetPoint(points[i].x, points[i].y);
 	}
 }
@@ -34,7 +38,7 @@ std::vector <Point> Polygon::GetPolygonPoints() {
 
 		if (i < (points.size() - 1)) {
 
-			LineSegment line(points[i], points[i + 1]);
+			LineSegment line(points[i], points[i + 1], r, g , b);
 			std::vector <Point> line_points = line.GetLineSegmentPoints();
 
 			border_points.insert(border_points.end(), line_points.begin(), line_points.end());
@@ -42,7 +46,7 @@ std::vector <Point> Polygon::GetPolygonPoints() {
 		}
 		else {
 
-			LineSegment line(points[i], points[0]);
+			LineSegment line(points[i], points[0], r, g, b);
 			std::vector <Point> line_points = line.GetLineSegmentPoints();
 
 			border_points.insert(border_points.end(), line_points.begin(), line_points.end());

@@ -9,7 +9,7 @@
 
 class Quad : public DrawObject {
 public:
-	Quad(Point p1, Point p2, Point p3, Point p4);
+	Quad(Point p1, Point p2, Point p3, Point p4, unsigned char r, unsigned char g, unsigned char b);
 
 	void Draw(Renderer *render);
 
@@ -19,6 +19,10 @@ public:
 	Point p2;
 	Point p3;
 	Point p4;
+
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
 };
 
 #endif // QUAD_H

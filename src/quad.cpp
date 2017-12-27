@@ -1,11 +1,14 @@
 #include "include/quad.h"
 
-Quad::Quad(Point p1, Point p2, Point p3, Point p4) {
+Quad::Quad(Point p1, Point p2, Point p3, Point p4, unsigned char r, unsigned char g, unsigned char b) {
 
 	this->p1 = p1;
 	this->p2 = p2;
 	this->p3 = p3;
 	this->p4 = p4;
+	this->r = r;
+	this->g = g;
+	this->b = b;
 }
 
 void Quad::Draw(Renderer *render) {
@@ -14,16 +17,17 @@ void Quad::Draw(Renderer *render) {
 
 	for (int i = 0; i < points.size(); ++i) {
 
+		render->SetDrawColor(SDL_Color{r, g, b, 255});
 		render->SetPoint(points[i].x, points[i].y);
 	}
 }
 
 std::vector <Point> Quad::GetQuadPoints() {
 
-	LineSegment p1p2(p1, p2);
-	LineSegment p2p3(p2, p3);
-	LineSegment p3p4(p3, p4);
-	LineSegment p4p1(p4, p1);
+	LineSegment p1p2(p1, p2, r, g, b);
+	LineSegment p2p3(p2, p3, r, g, b);
+	LineSegment p3p4(p3, p4, r, g, b);
+	LineSegment p4p1(p4, p1, r, g, b);
 
 	std::vector <Point> points;
 	std::vector <Point> p1p2_points = p1p2.GetLineSegmentPoints();

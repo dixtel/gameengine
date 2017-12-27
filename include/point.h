@@ -11,6 +11,7 @@ class Point : public DrawObject {
 public:
 	Point();
 	Point(float x, float y, float z);
+	Point(float x, float y, float z, unsigned char r, unsigned char g, unsigned char b);
 
 	void Draw(Renderer *render);
 
@@ -28,6 +29,10 @@ public:
 	float x;
 	float y;
 	float z;
+
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
 };
 
 #endif // POINT_H
