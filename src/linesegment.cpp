@@ -6,13 +6,13 @@ LineSegment::LineSegment(Point start, Point end) {
 	this->end = end;
 }
 
-void LineSegment::Draw(Renderer *renderer) {
+void LineSegment::Draw(Renderer *render) {
 
 	std::vector <Point> points = GetLineSegmentPoints();
 
 	for (int i = 0; i < points.size(); ++i) {
 
-		renderer->SetPoint(points[i].x, points[i].y);
+		render->SetPoint(points[i].x, points[i].y);
 	}
 }
 
