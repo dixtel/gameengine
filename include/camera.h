@@ -9,6 +9,7 @@
 #include "include/triangle.h"
 #include "include/quad.h"
 #include "include/polygon.h"
+#include "include/lighting.h"
 
 #include <vector>
 #include <iostream>
@@ -26,6 +27,7 @@ public:
 	void AddDrawObject(Triangle object);
 	void AddDrawObject(Quad object);
 	void AddDrawObject(Polygon object);
+	void AddDrawObject(Lighting object);
 
 	void SetBorder(int minX, int maxX, int minY, int maxY, int minZ, int maxZ);
 
@@ -36,6 +38,7 @@ private:
 	std::vector <Triangle> triangle_objects;
 	std::vector <Quad> quad_objects;
 	std::vector <Polygon> polygon_objects;
+	std::vector <Lighting> lighting_objects;
 
 	Renderer render;
 	int minX, maxX;

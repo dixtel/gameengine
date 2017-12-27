@@ -24,6 +24,10 @@ void Camera::DrawScene() {
 			(point.z >= minZ) && (point.z <= maxZ)) {
 
 			DrawObject *drawobject = &point;
+
+			if (lighting_objects.size())
+				drawobject->ApplyingLighting(lighting_objects);
+
 			drawobject->Draw(&render);
 		}
 	}
@@ -151,6 +155,7 @@ void Camera::ClearScene() {
 	triangle_objects.clear();
 	quad_objects.clear();
 	polygon_objects.clear();
+	lighting_objects.clear();
 }
 
 void Camera::AddDrawObject(Point object) {
@@ -181,6 +186,11 @@ void Camera::AddDrawObject(Quad object) {
 void Camera::AddDrawObject(Polygon object) {
 
 	polygon_objects.push_back(object);
+}
+
+void Camera::AddDrawObject(Lighting object) {
+
+	lighting_objects.push_back(object);
 }
 
 void Camera::SetBorder(int minX, int maxX, int minY, int maxY, int minZ, int maxZ) {
