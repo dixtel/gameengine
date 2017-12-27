@@ -122,6 +122,24 @@ void Camera::DrawScene() {
 		}
 	}
 
+	for(int i = 0; i < polygon_objects.size(); i++) {
+
+		Polygon polygon = polygon_objects[i];
+
+		for (int j = 0; j < polygon.points.size(); ++j) {
+
+			if ((polygon.points[j].x >= minX) && (polygon.points[j].x <= maxX) &&
+				(polygon.points[j].y >= minY) && (polygon.points[j].y <= maxY) &&
+				(polygon.points[j].z >= minZ) && (polygon.points[j].z <= maxZ)) {
+
+				DrawObject *drawobject = &polygon;
+				drawobject->Draw(&render);
+
+				break;
+			}
+		}
+	}
+
 	render.Draw();
 }
 
@@ -148,6 +166,11 @@ void Camera::AddDrawObject(Triangle object) {
 void Camera::AddDrawObject(Quad object) {
 
 	quad_objects.push_back(object);
+}
+
+void Camera::AddDrawObject(Polygon object) {
+
+	polygon_objects.push_back(object);
 }
 
 void Camera::SetBorder(int minX, int maxX, int minY, int maxY, int minZ, int maxZ) {
