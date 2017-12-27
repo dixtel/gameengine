@@ -2,7 +2,6 @@
 #include "include/point.h"
 #include "include/vector.h"
 #include "include/camera.h"
-#include "include/linesegment.h"
 
 #include <iostream>
 #include <vector>
@@ -14,6 +13,8 @@ int main() {
 	const unsigned WINDOW_WIDTH = 800;
 	const unsigned WINDOW_HEIGHT = 400;
 
+	srand(time(NULL));
+
 	Camera camera;
 
 	if (!camera.InitRender(WINDOW_WIDTH, WINDOW_HEIGHT, "gameengine")) {
@@ -23,13 +24,18 @@ int main() {
 
 	camera.SetBorder(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 100);
 
-	std::vector <Circle> circle_objects;
-	LineSegment line(Point(100, 100, 0), Point(400, 200, 0));
+	std::vector <Point> polygon_points;
 
-	camera.AddDrawObject(line);
+	polygon_points.push_back(Point(0, 0 ,0));
+	polygon_points.push_back(Point(300, 50 ,0));
+	polygon_points.push_back(Point(350, 200 ,0));
+	polygon_points.push_back(Point(260, 390 ,0));
+	polygon_points.push_back(Point(200, 150 ,0));
+	polygon_points.push_back(Point(100, 50 ,0));
+	polygon_points.push_back(Point(50, 50 ,0));
+	Polygon polygon(polygon_points);
 
-	srand(time(NULL));
-
+	camera.AddDrawObject(polygon);
 
 	bool running = true;
 	SDL_Event event;
@@ -47,13 +53,12 @@ int main() {
 				SDL_GetMouseState(&x, &y);
 
 				if (l == false) {
-					line.start = Point(x, y, 0);
+
 					l = true;
 				}
 				else {
-					line.end = Point(x, y, 0);
+
 					l = false;
-					camera.AddDrawObject(line);
 				}
 			}
 		}
