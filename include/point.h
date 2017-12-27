@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <vector>
+#include <math.h>
 
 class Point : public DrawObject {
 public:

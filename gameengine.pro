@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     src/circle.cpp \
     src/triangle.cpp \
     src/quad.cpp \
-    src/polygon.cpp
+    src/polygon.cpp \
+    src/lighting.cpp
 
 SUBDIRS += \
     gameengine.pro
@@ -34,4 +35,5 @@ HEADERS += \
     include/circle.h \
     include/triangle.h \
     include/quad.h \
-    include/polygon.h
+    include/polygon.h \
+    include/lighting.h

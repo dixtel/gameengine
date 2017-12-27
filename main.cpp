@@ -24,18 +24,14 @@ int main() {
 
 	camera.SetBorder(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 100);
 
-	std::vector <Point> polygon_points;
+	Point point(100, 100, 0, 255, 0, 0);
+	Point light_point(50, 50, 0, 255, 255, 255);
 
-	polygon_points.push_back(Point(0, 0 ,0));
-	polygon_points.push_back(Point(300, 50 ,0));
-	polygon_points.push_back(Point(350, 200 ,0));
-	polygon_points.push_back(Point(260, 390 ,0));
-	polygon_points.push_back(Point(200, 150 ,0));
-	polygon_points.push_back(Point(100, 50 ,0));
-	polygon_points.push_back(Point(50, 50 ,0));
-	Polygon polygon(polygon_points);
-
-	camera.AddDrawObject(polygon);
+	Lighting light(50, 50, 0);
+	light.radius = 100;
+	light.r = 255;
+	light.g = 255;
+	light.b = 255;
 
 	bool running = true;
 	SDL_Event event;
@@ -45,24 +41,32 @@ int main() {
 
 			if (event.type == SDL_QUIT)
 				running = false;
-			if (event.type == SDL_MOUSEBUTTONDOWN) {
+			else if (event.key.keysym.sym == SDLK_RIGHT) {
 
-				static bool l = false;
+				light.x++;
+				light_point.x++;
+			}
+			else if (event.key.keysym.sym == SDLK_LEFT) {
 
-				int x, y;
-				SDL_GetMouseState(&x, &y);
+				light.x--;
+				light_point.x--;
+			}
+			else if (event.key.keysym.sym == SDLK_UP) {
 
-				if (l == false) {
+				light.y--;
+				light_point.y--;
+			}
+			else if (event.key.keysym.sym == SDLK_DOWN) {
 
-					l = true;
-				}
-				else {
-
-					l = false;
-				}
+				light.y++;
+				light_point.y++;
 			}
 		}
 
+		camera.ClearScene();
+		camera.AddDrawObject(point);
+		camera.AddDrawObject(light);
+		camera.AddDrawObject(light_point);
 		camera.DrawScene();
 	}
 
